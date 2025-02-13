@@ -14,7 +14,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -54,25 +59,36 @@ class MainActivity : ComponentActivity() {
                         .padding(16.dp),
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Button(onClick = {
-                        showDatePicker { date -> selectedDate = date }
-                    }) {
-                        Text(text = "Select Date")
-                    }
+                    OutlinedTextField(
+                        value = selectedDate.toString(),
+                        onValueChange = {},
+                        modifier = Modifier.fillMaxWidth(),
+                        readOnly = true,
+                        trailingIcon = {
+                            IconButton(onClick = { showDatePicker { date -> selectedDate = date } }) {
+                                Icon(Icons.Default.DateRange, contentDescription = "Pick Date")
+                            }
+                        }
+                    )
 
-                    Button(onClick = {
-                        showTimePicker { time -> selectedTime = time }
-                    }) {
-                        Text(text = "Select Time")
-                    }
+                    OutlinedTextField(
+                        value = selectedTime.toString(),
+                        onValueChange = {},
+                        modifier = Modifier.fillMaxWidth(),
+                        readOnly = true,
+                        label = { Text("Select Time") },
+                        trailingIcon = {
+                            IconButton(onClick = { showTimePicker { time -> selectedTime = time } }) {
+                                Icon(Icons.Default.DateRange , contentDescription = "Pick Time")
+                            }
+                        }
+                    )
 
                     OutlinedTextField(
                         value = message,
                         onValueChange = { message = it },
                         modifier = Modifier.fillMaxWidth(),
-                        placeholder = {
-                            Text(text = "Message")
-                        }
+                        placeholder = { Text(text = "Message") }
                     )
 
                     Row(
