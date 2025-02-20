@@ -14,7 +14,6 @@ class AlarmReceiver: BroadcastReceiver() {
         val message = intent?.getStringExtra("EXTRA_MESSAGE") ?: return
         println("Alarm triggered: $message")
 
-        // Bildirim Gösterimi
         context?.let {
             val notificationManager = it.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             val channelId = "alarm_channel"
