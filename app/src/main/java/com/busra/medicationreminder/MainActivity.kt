@@ -11,9 +11,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DateRange
@@ -64,6 +66,7 @@ class MainActivity : ComponentActivity() {
                         onValueChange = {},
                         modifier = Modifier.fillMaxWidth(),
                         readOnly = true,
+                        label = { Text("Select Date") },
                         trailingIcon = {
                             IconButton(onClick = { showDatePicker { date -> selectedDate = date } }) {
                                 Icon(Icons.Default.DateRange, contentDescription = "Pick Date")
@@ -88,11 +91,11 @@ class MainActivity : ComponentActivity() {
                         value = message,
                         onValueChange = { message = it },
                         modifier = Modifier.fillMaxWidth(),
-                        placeholder = { Text(text = "Message") }
+                        label = { Text("Message") },
                     )
 
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().padding(16.dp),
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Button(onClick = {
@@ -106,6 +109,7 @@ class MainActivity : ComponentActivity() {
                         }) {
                             Text(text = "Schedule")
                         }
+                        Spacer(modifier = Modifier.width(16.dp))
                         Button(onClick = {
                             alarmItem?.let(scheduler::cancel)
                         }) {
